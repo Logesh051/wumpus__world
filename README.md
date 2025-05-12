@@ -1,6 +1,6 @@
 <h1>ExpNo 9: Solve Wumpus World Problem using Python demonstrating Inferences from Propositional Logic</h1> 
-<h3>Name:                       </h3>
-<h3>Register Number/Staff Id:                </h3>
+<h3>Name:  LOGESH.N.A                  </h3>
+<h3>Register Number/Staff Id:  212223240078             </h3>
 <H3>Aim:</H3>
 <p>
     To solve  Wumpus World Problem using Python demonstrating Inferences from Propositional Logic
@@ -28,4 +28,129 @@ It is assumed that there will always be a safe path that the agent can take to e
 
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8696111a-a4a7-47cb-ba4b-43a4ef88573f)
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/4be5bf06-79fa-4fa0-9334-38a33f06060b)
+
+
+## Program:
+```
+wumpus=[["Save","Breeze","PIT","Breeze"],
+        ["Smell","Save","Breeze","Save"],
+        ["WUMPUS","GOLD","PIT","Breeze"],
+        ["Smell","Save","Breeze","PIT"]]
+row=0
+column=0
+arrow=True
+player=True
+score=0
+while(player):
+    choice=input("press u to move up\npress d to move down\npress l to move left\npress r to move right\n")
+    if choice == "u":
+        if row != 0:
+            row-=1
+        else:
+            print("move denied")
+        
+        print("current location: ",wumpus[row][column],"\n")
+    elif choice == "d" :
+        if row!=3:
+            row+=1
+        else:
+            print("move denied")
+        
+        print("current location: ",wumpus[row][column],"\n")
+    elif choice == "l" :
+        if column!=0:
+            column-=1
+        else:
+            print("move denied")
+        
+        print("current location: ",wumpus[row][column],"\n")
+    elif choice == "r" :
+        if column!=3:
+            column+=1
+        else:
+            print("move denied")
+        
+        print("current location: ",wumpus[row][column],"\n")
+    else:
+        print("move denied")
+
+    if wumpus[row][column]=="Smell" and arrow != False:
+        arrow_choice=input("do you want to throw an arrow-->\npress y to throw\npress n to save your arrow\n")
+        if arrow_choice == "y":
+            arrow_throw=input("press u to throw up\npress d to throw down\npress l to throw left\npress r to throw right\n")
+            if arrow_throw == "u":
+                if wumpus[row-1][column] == "WUMPUS":
+                    print("wumpus killed!")
+                    score+=1000
+                    print("score: ",score)
+                    wumpus[row-1][column] = "Save"
+                    wumpus[1][0]="Save"
+                    wumpus[3][0]="Save"
+                else:
+                    print("arrow wasted...")
+                    score-=10
+                    print("score: ",score)
+            elif arrow_throw == "d":
+                if wumpus[row+1][column] == "WUMPUS":
+                    print("wumpus killed!")
+                    score+=1000
+                    print("score: ",score)
+                    wumpus[row+1][column] = "Save"
+                    wumpus[1][0]="Save"
+                    wumpus[3][0]="Save"
+                else:
+                    print("arrow wasted...")
+                    score-=10
+                    print("score: ",score)
+            elif arrow_throw == "l":
+                if wumpus[row][column-1] == "WUMPUS":
+                    print("wumpus killed!")
+                    score+=1000
+                    print("score: ",score)
+                    wumpus[row][column-1] = "Save"
+                    wumpus[1][0]="Save"
+                    wumpus[3][0]="Save"
+                else:
+                    print("arrow wasted...")
+                    score-=10
+                    print("score: ",score)
+            elif arrow_throw == "r":
+                if wumpus[row][column+1] == "WUMPUS":
+                    print("wumpus killed!")
+                    score+=1000
+                    print("score: ",score)
+                    wumpus[row][column+1] = "Save"
+                    wumpus[1][0]="Save"
+                    wumpus[3][0]="Save"
+                else:
+                    print("arrow wasted...")
+                    score-=10
+                    print("score: ",score)
+                
+            
+            arrow=False
+    if wumpus[row][column] == "WUMPUS" :
+        score-=1000
+        print("\nWumpus here!!\n You Die\nAnd your score is: ",score
+              ,"\n")
+        break
+    if(wumpus[row][column]=='GOLD'):
+        score+=1000
+        print("GOLD FOUND!You won....\nYour score is: ",score,"\n")
+        break
+    if(wumpus[row][column]=='PIT'):
+        score-=1000
+        print("Ahhhhh!!!!\nYou fell in pit.\nAnd your score is: ",score,"\n")
+        break
+
+```
+
+## Output:
+![image](https://github.com/user-attachments/assets/2b3d65bd-f6a7-4505-a4e7-c18d7fe26f3f)
+
+## Result:
+Thus the program was executed successfully.
+
+
+
 
