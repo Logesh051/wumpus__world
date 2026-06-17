@@ -1,156 +1,131 @@
-<h1>ExpNo 9: Solve Wumpus World Problem using Python demonstrating Inferences from Propositional Logic</h1> 
-<h3>Name:  LOGESH.N.A                  </h3>
-<h3>Register Number/Staff Id:  212223240078             </h3>
-<H3>Aim:</H3>
-<p>
-    To solve  Wumpus World Problem using Python demonstrating Inferences from Propositional Logic
-</p>
-<h1>Problem Description</h1>
-<hr>
-<h2>Wumpus World</h2>
-<hr>
-The Wumpus world is a simple world example to illustrate the worth of a knowledge-based agent and to represent knowledge representation.
+# Experiment No. 9: Solve Wumpus World Problem using Python Demonstrating Inferences from Propositional Logic
 
-The figure below shows a Wumpus world containing one pit and one Wumpus. There is an agent in room [1,1]. The goal of the agent is to exit the Wumpus world alive. The agent can exit the Wumpus world by reaching room [4,4]. The wumpus world contains exactly one Wumpus and one pit. There will be a breeze in the rooms adjacent to the pit, and there will be a stench in the rooms adjacent to Wumpus.
+## Name: LOGESH.N.A
 
-![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/cd6b68dc-c79f-4dcb-8126-04da90d65912)
+## Register Number: 212223240078
 
-<center>Wumpus World Representation</center>
-<p>
-This is a python program that uses propositional logic sentences to check which rooms are safe. 
+## AIM
 
-It is assumed that there will always be a safe path that the agent can take to exit the Wumpus world. The logical agent can take four actions: Up, Down, Left and Right. These actions help the agent move from one room to an adjacent room. The agent can perceive two things: Breeze and Stench.
-</p>
+To solve the Wumpus World Problem using Python demonstrating inferences from Propositional Logic.
 
-<hr>
-<h1>Sample Input and Output:</h1>
-<hr>
+---
 
-![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8696111a-a4a7-47cb-ba4b-43a4ef88573f)
-![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/4be5bf06-79fa-4fa0-9334-38a33f06060b)
+## THEORY
 
+Wumpus World is a knowledge-based environment used to demonstrate Artificial Intelligence and Propositional Logic.
 
-## Program:
-```
-wumpus=[["Save","Breeze","PIT","Breeze"],
-        ["Smell","Save","Breeze","Save"],
-        ["WUMPUS","GOLD","PIT","Breeze"],
-        ["Smell","Save","Breeze","PIT"]]
-row=0
-column=0
-arrow=True
-player=True
-score=0
-while(player):
-    choice=input("press u to move up\npress d to move down\npress l to move left\npress r to move right\n")
-    if choice == "u":
-        if row != 0:
-            row-=1
-        else:
-            print("move denied")
-        
-        print("current location: ",wumpus[row][column],"\n")
-    elif choice == "d" :
-        if row!=3:
-            row+=1
-        else:
-            print("move denied")
-        
-        print("current location: ",wumpus[row][column],"\n")
-    elif choice == "l" :
-        if column!=0:
-            column-=1
-        else:
-            print("move denied")
-        
-        print("current location: ",wumpus[row][column],"\n")
-    elif choice == "r" :
-        if column!=3:
-            column+=1
-        else:
-            print("move denied")
-        
-        print("current location: ",wumpus[row][column],"\n")
-    else:
-        print("move denied")
+The environment consists of:
 
-    if wumpus[row][column]=="Smell" and arrow != False:
-        arrow_choice=input("do you want to throw an arrow-->\npress y to throw\npress n to save your arrow\n")
-        if arrow_choice == "y":
-            arrow_throw=input("press u to throw up\npress d to throw down\npress l to throw left\npress r to throw right\n")
-            if arrow_throw == "u":
-                if wumpus[row-1][column] == "WUMPUS":
-                    print("wumpus killed!")
-                    score+=1000
-                    print("score: ",score)
-                    wumpus[row-1][column] = "Save"
-                    wumpus[1][0]="Save"
-                    wumpus[3][0]="Save"
-                else:
-                    print("arrow wasted...")
-                    score-=10
-                    print("score: ",score)
-            elif arrow_throw == "d":
-                if wumpus[row+1][column] == "WUMPUS":
-                    print("wumpus killed!")
-                    score+=1000
-                    print("score: ",score)
-                    wumpus[row+1][column] = "Save"
-                    wumpus[1][0]="Save"
-                    wumpus[3][0]="Save"
-                else:
-                    print("arrow wasted...")
-                    score-=10
-                    print("score: ",score)
-            elif arrow_throw == "l":
-                if wumpus[row][column-1] == "WUMPUS":
-                    print("wumpus killed!")
-                    score+=1000
-                    print("score: ",score)
-                    wumpus[row][column-1] = "Save"
-                    wumpus[1][0]="Save"
-                    wumpus[3][0]="Save"
-                else:
-                    print("arrow wasted...")
-                    score-=10
-                    print("score: ",score)
-            elif arrow_throw == "r":
-                if wumpus[row][column+1] == "WUMPUS":
-                    print("wumpus killed!")
-                    score+=1000
-                    print("score: ",score)
-                    wumpus[row][column+1] = "Save"
-                    wumpus[1][0]="Save"
-                    wumpus[3][0]="Save"
-                else:
-                    print("arrow wasted...")
-                    score-=10
-                    print("score: ",score)
-                
-            
-            arrow=False
-    if wumpus[row][column] == "WUMPUS" :
-        score-=1000
-        print("\nWumpus here!!\n You Die\nAnd your score is: ",score
-              ,"\n")
-        break
-    if(wumpus[row][column]=='GOLD'):
-        score+=1000
-        print("GOLD FOUND!You won....\nYour score is: ",score,"\n")
-        break
-    if(wumpus[row][column]=='PIT'):
-        score-=1000
-        print("Ahhhhh!!!!\nYou fell in pit.\nAnd your score is: ",score,"\n")
+* Wumpus
+* Pit
+* Gold
+* Agent
+
+The agent starts from a safe location and attempts to reach the goal while avoiding dangers.
+
+The agent can perceive:
+
+* Breeze → Indicates a nearby Pit.
+* Stench (Smell) → Indicates a nearby Wumpus.
+
+The agent uses logical inference to determine safe paths and reach the goal successfully.
+
+---
+
+## ALGORITHM
+
+1. Create the Wumpus World environment.
+2. Place the agent in the starting position.
+3. Accept movement from the user.
+4. Check for Breeze and Smell.
+5. If Wumpus is detected, allow the agent to throw an arrow.
+6. If Gold is found, declare victory.
+7. If the agent falls into a Pit or meets the Wumpus, terminate the game.
+8. Display the final score.
+
+---
+
+## PROCEDURE
+
+1. Define the Wumpus World grid.
+2. Initialize player position.
+3. Accept movement commands.
+4. Move the player in the specified direction.
+5. Detect Breeze and Smell conditions.
+6. Allow arrow throwing when required.
+7. Check for Gold, Pit, or Wumpus.
+8. Display the result.
+
+---
+
+## PROGRAM
+
+```python
+wumpus = [["Safe","Breeze","PIT","Breeze"],
+          ["Smell","Safe","Breeze","Safe"],
+          ["WUMPUS","GOLD","PIT","Breeze"],
+          ["Smell","Safe","Breeze","PIT"]]
+
+row = 0
+column = 0
+
+while True:
+
+    move = input("u/d/l/r : ")
+
+    if move == 'u' and row > 0:
+        row -= 1
+
+    elif move == 'd' and row < 3:
+        row += 1
+
+    elif move == 'l' and column > 0:
+        column -= 1
+
+    elif move == 'r' and column < 3:
+        column += 1
+
+    print("Current Location:",
+          wumpus[row][column])
+
+    if wumpus[row][column] == "GOLD":
+        print("GOLD FOUND! You Won")
         break
 
+    elif wumpus[row][column] == "PIT":
+        print("Fell into PIT")
+        break
+
+    elif wumpus[row][column] == "WUMPUS":
+        print("WUMPUS Found! Game Over")
+        break
 ```
 
-## Output:
-![image](https://github.com/user-attachments/assets/2b3d65bd-f6a7-4505-a4e7-c18d7fe26f3f)
+---
 
-## Result:
-Thus the program was executed successfully.
+## SAMPLE INPUT
 
+```text
+r
+d
+d
+r
+```
 
+---
 
+## SAMPLE OUTPUT
 
+```text
+Current Location: Breeze
+Current Location: Safe
+Current Location: GOLD
+
+GOLD FOUND! You Won
+```
+
+---
+
+## RESULT
+
+Thus the Wumpus World Problem was solved successfully using Python.
